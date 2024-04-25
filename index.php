@@ -37,12 +37,15 @@ $resultados = $consulta->fetchAll(PDO::FETCH_ASSOC);
                 <h5 class="card-title">' . $product["price"] . '€/kg</h5>
             </div>
           </div>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+          <div>
+            <input class="form-control" type="number" name="" id="">
+            <a href="#" class="btn btn-primary">Add to Cart</a>
+          </div>
         </div>
       </div>';
     }
     ?>
-
+<input type="number" name="" id="">
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
