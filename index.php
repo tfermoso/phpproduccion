@@ -1,7 +1,7 @@
 <?php
 require_once("conexion.php");
 $sql="select * from product";
-$consulta = $conexion->prepare($sql);
+$consulta = $conn->prepare($sql);
 // Ejecutar la consulta
 $consulta->execute();
 // Obtener los resultados
