@@ -1,3 +1,13 @@
 .producto-detalle{
     display: flex;
 }
+.add-to-cart input{
+    width: 60% !important;
+    margin-right: 5px;
+}
+.add-to-cart a{
+    width: 30%;
+}
+.add-to-cart{
+    display: flex;
+}
