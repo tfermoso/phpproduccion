@@ -23,10 +23,15 @@ $resultados = $consulta->fetchAll(PDO::FETCH_ASSOC);
   <?php
     // Mostrar los resultados
     foreach ($resultados as $product) {
-        echo "Name: " . $product['name'] . "<br>";
-        echo "price: " . $product['price'] . "<br>";
-        // Puedes mostrar más columnas según la estructura de tu tabla
-        echo "<br>";
+        $card='<div class="card" style="width: 18rem;">
+        <img src="assets/product/'.$product["image"].'" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">'.$product["name"].'</h5>
+          <p class="card-text">'.$product["description"].'</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>';
+    echo $card;
     }
     ?>
 
