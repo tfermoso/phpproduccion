@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once("conexion.php");
 
 $sql = "select * from product";
@@ -7,6 +8,15 @@ $consulta = $conn->prepare($sql);
 $consulta->execute();
 // Obtener los resultados
 $resultados = $consulta->fetchAll(PDO::FETCH_ASSOC);
+//Compruebo si hay carrito
+if(isset($_SESSION["user"])){
+    //comprobaria si hay carrito en la bbdd
+}else{
+    if(isset($_SESSION["cart"])){
+        $cart=$_SESSION["cart"];
+
+    }
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -44,7 +54,7 @@ $resultados = $consulta->fetchAll(PDO::FETCH_ASSOC);
                     <a class="nav-link" href="#">Contacto</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i> Carrito</a>
+                    <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i><?php echo isset($cart)?count($cart):''; ?> </a>
                 </li>
             </ul>
         </div>
