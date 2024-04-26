@@ -18,8 +18,9 @@ if(isset($_GET["idproduct"])){
         }
         array_push($cart,$product);
         $_SESSION["cart"]=$cart;
-        var_dump($cart);
+      
     }
 }
-
+header("Location: ./");
+exit();
 ?>
