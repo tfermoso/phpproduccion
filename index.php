@@ -1,5 +1,7 @@
 <?php
 require_once("conexion.php");
+session_start();
+$_SESSION["temporal_user"]=1;
 $sql = "select * from product";
 $consulta = $conn->prepare($sql);
 // Ejecutar la consulta
