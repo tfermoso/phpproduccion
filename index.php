@@ -44,9 +44,9 @@ $resultados = $consulta->fetchAll(PDO::FETCH_ASSOC);
           </div>
           <form action"add_to_cart.php" method="get">
           <div class="add-to-cart">
-            
-            <input min=1 step=1 class="form-control" type="number" name="" id="">
-            <a href="#" class="btn btn-primary"><i class="fa-solid fa-cart-plus"></i></a>
+            <input type="hidden" name="idproduct" value="'.$product["idproduct"].'">
+            <input min=1 step=1 class="form-control" type="number" name="quantity" id="">
+            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-cart-plus"></i></button>
           </div>
           </form>
         </div>
@@ -54,6 +54,8 @@ $resultados = $consulta->fetchAll(PDO::FETCH_ASSOC);
     }
     ?>
      </div>
+
+    
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
