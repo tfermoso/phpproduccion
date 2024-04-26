@@ -1,7 +1,6 @@
 <?php
 require_once("conexion.php");
-session_start();
-$_SESSION["temporal_user"]=1;
+
 $sql = "select * from product";
 $consulta = $conn->prepare($sql);
 // Ejecutar la consulta
@@ -43,10 +42,13 @@ $resultados = $consulta->fetchAll(PDO::FETCH_ASSOC);
                 <h5 class="card-title">' . $product["price"] . '€/kg</h5>
             </div>
           </div>
+          <form action"add_to_cart.php" method="get">
           <div class="add-to-cart">
-            <input class="form-control" type="number" name="" id="">
+            
+            <input min=1 step=1 class="form-control" type="number" name="" id="">
             <a href="#" class="btn btn-primary"><i class="fa-solid fa-cart-plus"></i></a>
           </div>
+          </form>
         </div>
       </div>';
     }
