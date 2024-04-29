@@ -62,7 +62,7 @@ if (isset($_SESSION["cart"])) {
     </nav>
     <div class="container contenedor-productos row">
         <div class="shop-cart" id="cart">
-            <a class="nav-link" href="#"><span><i class="fas fa-shopping-cart"></i><?php echo isset($cart) ? count($cart) : ''; ?> </span></a>
+            <a class="nav-link" href="cart"><span><i class="fas fa-shopping-cart"></i><?php echo isset($cart) ? count($cart) : ''; ?> </span></a>
         </div>
         <h3>Productos</h3>
 

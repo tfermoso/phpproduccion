@@ -5,6 +5,7 @@ class Product{
     public $description;
     public $price;
     public $quantity;
+    public $image;
 
     public function __construct($idproduct,$quantity)
     {
