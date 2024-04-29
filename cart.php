@@ -1,36 +1,34 @@
 <?php
 include_once("./models/product.php");
 session_start();
-if(isset($_SESSION["username"])){
-    $user=$_SESSION["username"];
-  if(isset($_SESSION["cart"])){
-    //Existe usuario y carrito en session
-    $user=$_SESSION["username"];
-    $cart=$_SESSION["cart"];
-    //Consultamos información de los productos a la bbdd
-    require_once("conexion.php");
-    foreach ($cart as $product) {
-        $sql="select * from product where idproduct=?";
-        $stm=$conn->prepare($sql);
-        $stm->bindParam(1,$product->idproduct);
-        $stm->execute();
-        if($stm->rowCount()>0){
-            $result=$stm->fetchAll(PDO::FETCH_ASSOC);
-            $product->name=$result[0]["name"];
-            $product->description=$result[0]["description"];
-            $product->price=$result[0]["price"];
-            $product->image=$result[0]["image"];
+if (isset($_SESSION["username"])) {
+    $user = $_SESSION["username"];
+    if (isset($_SESSION["cart"])) {
+        //Existe usuario y carrito en session
+        $user = $_SESSION["username"];
+        $cart = $_SESSION["cart"];
+        //Consultamos información de los productos a la bbdd
+        require_once("conexion.php");
+        foreach ($cart as $product) {
+            $sql = "select * from product where idproduct=?";
+            $stm = $conn->prepare($sql);
+            $stm->bindParam(1, $product->idproduct);
+            $stm->execute();
+            if ($stm->rowCount() > 0) {
+                $result = $stm->fetchAll(PDO::FETCH_ASSOC);
+                $product->name = $result[0]["name"];
+                $product->description = $result[0]["description"];
+                $product->price = $result[0]["price"];
+                $product->image = $result[0]["image"];
+            }
         }
-
+    } else {
+        header("Location: ./");
+        exit();
     }
-
-  }else{
+} else {
     header("Location: ./");
     exit();
-  }
-}else{
-     header("Location: ./");
-     exit();
 }
 
 var_dump($cart);
@@ -82,8 +80,37 @@ var_dump($cart);
             <a class="nav-link" href="cart"><span><i class="fas fa-shopping-cart"></i><?php echo isset($cart) ? count($cart) : ''; ?> </span></a>
         </div>
         <h3>Carrito</h3>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col">Product</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Total</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td><img class="img-cart" src="assets/product/manzana.jpg" alt="" srcset=""></td>
+                        <td>
+                            <h6>Manzana</h6>
+                            <p>Mazana golden</p>
+                        </td>
+                        <td><input type="number" name="" id="" value="4"></td>
+                        <td>1,2 €/kg</td>
+                        <td>4,8 €</td>
+                        <td>x</td>
+                    </tr>
 
-        
+                </tbody>
+            </table>
+        </div>
+
     </div>
 
 
@@ -104,4 +131,3 @@ var_dump($cart);
 </body>
 
 </html>
-
