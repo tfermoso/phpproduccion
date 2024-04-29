@@ -95,7 +95,9 @@ var_dump($cart);
                 </thead>
                 <tbody>
                     <?php
+                    $total=0;
                     foreach ($cart as $key => $product) {
+                        $total+=$product->price*$product->quantity;
                         echo '<tr>
                             <th scope="row">'.$key.'</th>
                             <td><img class="img-cart" src="assets/product/'.$product->image.'" alt="" srcset=""></td>
@@ -109,6 +111,8 @@ var_dump($cart);
                             <td>x</td>
                         </tr>';
                     }
+                    echo "<tr><td span='4'>Total</td><td span='2'>".$total."</td></tr>"
+
                     ?>
 
 
