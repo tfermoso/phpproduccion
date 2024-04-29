@@ -55,14 +55,13 @@ if (isset($_SESSION["user"])) {
                     </li>
 
                 </ul>
+                <span id="user"></span>
             </div>
         </div>
     </nav>
     <div class="container contenedor-productos row">
-        <div class="shop-cart">
-
+        <div class="shop-cart" id="cart">
             <a class="nav-link" href="#"><span><i class="fas fa-shopping-cart"></i><?php echo isset($cart) ? count($cart) : ''; ?> </span></a>
-
         </div>
         <h3>Productos</h3>
 
@@ -94,6 +93,28 @@ if (isset($_SESSION["user"])) {
         ?>
     </div>
 
+    <div class="modal" tabindex="-1" id="modal-login">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Login</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="login.php" method="post">
+                    <div class="modal-body">
+                        <h5>Para continuar comprando hay que inicial sesión</h5>
+                        <hr>
+                        <input class="form-control email" type="email" name="email" id="" placeholder="Email" required>
+                        <input class="form-control" placeholder="Password" type="password" name="password" id="" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
 
@@ -105,6 +126,9 @@ if (isset($_SESSION["user"])) {
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="./assets/js/product.js"></script>
+
 </body>
 
 </html>
