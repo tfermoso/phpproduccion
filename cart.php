@@ -94,18 +94,23 @@ var_dump($cart);
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td><img class="img-cart" src="assets/product/manzana.jpg" alt="" srcset=""></td>
-                        <td>
-                            <h6>Manzana</h6>
-                            <p>Mazana golden</p>
-                        </td>
-                        <td><input type="number" name="" id="" value="4"></td>
-                        <td>1,2 €/kg</td>
-                        <td>4,8 €</td>
-                        <td>x</td>
-                    </tr>
+                    <?php
+                    foreach ($cart as $key => $product) {
+                        echo '<tr>
+                            <th scope="row">'.$key.'</th>
+                            <td><img class="img-cart" src="assets/product/'.$product->image.'" alt="" srcset=""></td>
+                            <td>
+                                <h6>'.$product->name.'</h6>
+                                <p>'.$product->description.'</p>
+                            </td>
+                            <td><input type="number" name="" id="" value="'.$product->quantity.'"></td>
+                            <td>'.$product->price.' €/kg</td>
+                            <td>'.$product->price*$product->quantity.' €</td>
+                            <td>x</td>
+                        </tr>';
+                    }
+                    ?>
+
 
                 </tbody>
             </table>
