@@ -136,7 +136,7 @@ var_dump($cart);
                             <td><input type="number" name="" id="" value="' . $product->quantity . '"></td>
                             <td>' . $product->price . ' €/kg</td>
                             <td>' . $product->price * $product->quantity . ' €</td>
-                            <td>x</td>
+                            <td><span id="idcartdetail'.$product->idcartdetail.'">x</span></td>
                         </tr>';
                     }
                     echo "<tr><td class='importe_total'  colspan='5'>Total:</td><td class='euros_total' colspan='2'>" . $total . " €</td></tr>"
