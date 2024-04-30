@@ -115,6 +115,7 @@ $idcart=isset($_SESSION["idcart"])?$_SESSION["idcart"]:"";
           <form action="add_to_cart.php" method="get">
           <div class="add-to-cart">
             <input type="hidden" name="idcart" value="' . $idcart . '">
+            <input type="hidden" name="price" value="' . $product["price"] . '">
             <input type="hidden" name="idproduct" value="' . $product["idproduct"] . '">
             <input min=1 step=1 class="form-control" type="number" name="quantity" id="" required >
             <button type="submit" class="btn btn-primary"><i class="fa-solid fa-cart-plus"></i></button>
