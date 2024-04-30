@@ -5,8 +5,9 @@ session_start();
 if (isset($_GET["idproduct"])) {
     $idproduct = $_GET["idproduct"];
     $quantity = isset($_GET["quantity"]) ? $_GET["quantity"] : 1;
+ 
     //Comprobamos si el usuario se ha logeado
-    if (isset($_SESSION["user"])) {
+    if (isset($_SESSION["username"])) {
         //Guardamos en bbdd
         if (isset($_GET["idcart"])) {
             $idcart=$_GET["idcart"];
@@ -19,9 +20,12 @@ if (isset($_GET["idproduct"])) {
             $stm->bindParam(2,$idproduct);
             $stm->bindParam(3,$quantity);
             $stm->bindParam(4,$price);
+
             $stm->execute();
+
         } 
     } else {
+      
         //Guardamos el carrito en session
         $product = new Product($idproduct, $quantity);
         if (isset($_SESSION["cart"])) {
