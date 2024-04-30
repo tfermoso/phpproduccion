@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once("conexion.php");
+include_once("./models/product.php");
 
 $sql = "select * from product";
 $consulta = $conn->prepare($sql);
@@ -9,13 +10,33 @@ $consulta->execute();
 // Obtener los resultados
 $resultados = $consulta->fetchAll(PDO::FETCH_ASSOC);
 //Compruebo si hay carrito
-if (isset($_SESSION["username"])) {
-    //comprobaria si hay carrito en la bbdd
-    $user = $_SESSION["username"];
-}
 if (isset($_SESSION["cart"])) {
     $cart = $_SESSION["cart"];
 }
+if (isset($_SESSION["username"])) {
+    //comprobaria si hay carrito en la bbdd
+    $user = $_SESSION["username"];
+    $iduser=$_SESSION["iduser"];
+    if(isset($cart)){
+        $sql="SELECT * FROM cart C 
+        left join cart_detail D on C.idcart=D.idcart 
+        where iduser=? order by date desc limit 1;";
+        $stm=$conn->prepare($sql);
+        $stm->bindParam(1,$iduser);
+        $stm->execute();
+        $result=$stm->fetchAll(PDO::FETCH_ASSOC);
+        $cart=array();
+        foreach ($result as $key => $p) {
+            $product=new Product($p["idproduct"],$p["quantity"]);
+            array_push($cart,$product);
+        }
+        $_SESSION["cart"]=$cart;
+        $_SESSION["idcart"]=$result[0]["idcart"];
+
+
+    }
+}
+
 
 ?>
 <!doctype html>
