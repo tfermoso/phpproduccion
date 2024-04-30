@@ -15,7 +15,7 @@ $(".quantity").change((e)=>{
 });
 
 $(".delete").click((e)=>{
-    let idcartdetail=e.currentTarget.id;
+    let idcartdetail=(e.currentTarget.id).replace("idcartdetail","");
     let url="delete_cart_detail.php?idcartdetail="+idcartdetail;
     fetch(url)
     .then(response => response.json())
