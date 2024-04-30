@@ -17,10 +17,9 @@ if (isset($_SESSION["username"])) {
     //comprobaria si hay carrito en la bbdd
     $user = $_SESSION["username"];
     $iduser=$_SESSION["iduser"];
-    if(isset($cart)){
-        $sql="SELECT * FROM cart C 
-        left join cart_detail D on C.idcart=D.idcart 
-        where iduser=? order by date desc limit 1;";
+    if(! isset($cart)){
+
+        $sql="select * from cart_detail where idcart=(select idcart from cart where iduser=? order by date desc limit 1)";
         $stm=$conn->prepare($sql);
         $stm->bindParam(1,$iduser);
         $stm->execute();
@@ -84,7 +83,8 @@ if (isset($_SESSION["username"])) {
     <div class="container contenedor-productos row">
         <div class="shop-cart" id="cart">
             <a class="nav-link" href="cart"><span><i class="fas fa-shopping-cart"></i><?php echo isset($cart) ? count($cart) : ''; ?> </span></a>
-        </div>
+            <?php echo isset($_SESSION["idcart"])?$_SESSION["idcart"]:"nada" ?>
+         </div>
         <h3>Productos</h3>
 
         <?php
