@@ -8,6 +8,7 @@ if(isset($_GET["idproduct"])){
     //Comprobamos si el usuario se ha logeado
     if(isset($_SESSION["user"])){
         //Guardamos en bbdd
+        
     }else{
         //Guardamos el carrito en session
         $product=new Product($idproduct,$quantity);
