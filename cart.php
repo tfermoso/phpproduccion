@@ -111,7 +111,7 @@ var_dump($cart);
                             <td>x</td>
                         </tr>';
                     }
-                    echo "<tr><td span='4'>Total</td><td span='2'>".$total."</td></tr>"
+                    echo "<tr><td class='importe_total'  colspan='5'>Total:</td><td class='euros_total' colspan='2'>".$total." €</td></tr>"
 
                     ?>
 
