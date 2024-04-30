@@ -12,8 +12,10 @@ if(isset($_POST["email"])){
         if($stm->rowCount()>0){
             $result=$stm->fetchAll(PDO::FETCH_ASSOC);
             $username=$result[0]["username"];
+            $iduser=$result[0]["iduser"];
             session_start();
             $_SESSION["username"]=$username;
+            $_SESSION["iduser"]=$iduser;
             header("Location: ./");
             exit();
         }else{

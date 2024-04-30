@@ -7,6 +7,7 @@ if (isset($_SESSION["username"])) {
         //Existe usuario y carrito en session
         $user = $_SESSION["username"];
         $cart = $_SESSION["cart"];
+        $iduser = $_SESSION["iduser"];
         //Consultamos información de los productos a la bbdd
         require_once("conexion.php");
         foreach ($cart as $product) {
@@ -21,6 +22,33 @@ if (isset($_SESSION["username"])) {
                 $product->price = $result[0]["price"];
                 $product->image = $result[0]["image"];
             }
+        }
+        if (isset($_SESSION["idcart"])) {
+            $idcart = $_SESSION["idcart"];
+        } else {
+            //Guardamos el carrito en bbdd
+            $sql = "insert into cart (iduser) value (?)";
+            $stm = $conn->prepare($sql);
+            $stm->bindParam(1, $iduser);
+            $stm->execute();
+            $idcart = $conn->lastInsertId();
+            $_SESSION["idcart"] = $idcart;
+        }
+        //Borramos la tabla cartdetail
+        $sql="delete from cart_detail where idcart=".$idcart;
+        $stm=$conn->prepare($sql);
+        $stm->execute();
+        //Insertamos los productos en cart_detail
+        foreach ($cart as $key => $product) {
+            $sql = "insert into cart_detail (idcart,idproduct,quantity,price) values (?,?,?,?)";
+            $stm = $conn->prepare($sql);
+            $stm->bindParam(1, $idcart);
+            $stm->bindParam(2, $product->idproduct);
+            $stm->bindParam(3, $product->quantity);
+            $stm->bindParam(4, $product->price);
+            $stm->execute();
+            $idcartdetail = $conn->lastInsertId();
+            $product->idcartdetail=$idcartdetail;
         }
     } else {
         header("Location: ./");
@@ -95,23 +123,23 @@ var_dump($cart);
                 </thead>
                 <tbody>
                     <?php
-                    $total=0;
+                    $total = 0;
                     foreach ($cart as $key => $product) {
-                        $total+=$product->price*$product->quantity;
+                        $total += $product->price * $product->quantity;
                         echo '<tr>
-                            <th scope="row">'.$key.'</th>
-                            <td><img class="img-cart" src="assets/product/'.$product->image.'" alt="" srcset=""></td>
+                            <th scope="row">' . $key . '</th>
+                            <td><img class="img-cart" src="assets/product/' . $product->image . '" alt="" srcset=""></td>
                             <td>
-                                <h6>'.$product->name.'</h6>
-                                <p>'.$product->description.'</p>
+                                <h6>' . $product->name . '</h6>
+                                <p>' . $product->description . '</p>
                             </td>
-                            <td><input type="number" name="" id="" value="'.$product->quantity.'"></td>
-                            <td>'.$product->price.' €/kg</td>
-                            <td>'.$product->price*$product->quantity.' €</td>
+                            <td><input type="number" name="" id="" value="' . $product->quantity . '"></td>
+                            <td>' . $product->price . ' €/kg</td>
+                            <td>' . $product->price * $product->quantity . ' €</td>
                             <td>x</td>
                         </tr>';
                     }
-                    echo "<tr><td class='importe_total'  colspan='5'>Total:</td><td class='euros_total' colspan='2'>".$total." €</td></tr>"
+                    echo "<tr><td class='importe_total'  colspan='5'>Total:</td><td class='euros_total' colspan='2'>" . $total . " €</td></tr>"
 
                     ?>
 

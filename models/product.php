@@ -6,6 +6,7 @@ class Product{
     public $price;
     public $quantity;
     public $image;
+    public $idcartdetail;
 
     public function __construct($idproduct,$quantity)
     {
