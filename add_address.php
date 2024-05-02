@@ -2,6 +2,30 @@
 session_start();
 if(isset($_SESSION["username"])){
     $user=$_SESSION["username"];
+    if(isset($_POST["street"])){
+        $street=$_POST["street"];
+        $city=$_POST["city"];
+        $zipcode=$_POST["zipcode"];
+        $country=$_POST["country"];
+        $iduser=$_SESSION["iduser"];
+        include("conexion.php");
+        $sql="insert into address (street,city,zipcode,country,iduser)
+         values (?,?,?,?,?)";
+         $stm=$conn->prepare($sql);
+         $stm->bindParam(1,$street);
+         $stm->bindParam(2,$city);
+         $stm->bindParam(3,$zipcode);
+         $stm->bindParam(4,$country);
+         $stm->bindParam(5,$iduser);
+         $stm->execute();
+         if($stm->rowCount()>0){
+            header("Location: cart");
+            exit();
+         }else{
+            $error="Error al crear la dirección";
+         }
+
+    }
 
 }else{
     header("Location: ./");
@@ -57,6 +81,11 @@ if(isset($_SESSION["username"])){
             <input class="form-control" type="text" name="country" id="" placeholder="Country">
             <input class="btn btn-success" type="submit" value="New Address">
         </form>
+        <?php
+            if(isset($error)){
+                echo "<p>".$error."</p>";
+            }
+        ?>
     </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
