@@ -126,7 +126,7 @@ var_dump($cart);
                     $total = 0;
                     foreach ($cart as $key => $product) {
                         $total += $product->price * $product->quantity;
-                        echo '<tr>
+                        echo '<tr id="idcartdetail'.$product->idcartdetail.'">
                             <th scope="row">' . $key . '</th>
                             <td><img class="img-cart" src="assets/product/' . $product->image . '" alt="" srcset=""></td>
                             <td>
@@ -136,7 +136,7 @@ var_dump($cart);
                             <td><input class="quantity" type="number" name="" id="" value="' . $product->quantity . '"></td>
                             <td>' . $product->price . ' €/kg</td>
                             <td>' . $product->price * $product->quantity . ' €</td>
-                            <td><span class="delete" id="idcartdetail'.$product->idcartdetail.'"><i class="fa-solid fa-x"></i></span></td>
+                            <td><span class="delete" ><i class="fa-solid fa-x"></i></span></td>
                         </tr>';
                     }
                     echo "<tr><td class='importe_total'  colspan='5'>Total:</td><td class='euros_total' id='euros_total' colspan='2'>" . $total . " €</td></tr>"
