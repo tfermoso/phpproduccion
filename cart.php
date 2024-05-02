@@ -163,7 +163,7 @@ var_dump($cart);
                     <?php
                     foreach ($address as $key => $dir) {
                         echo '<div class="col-md-3 col-sm-12">
-                    <input type="radio" name="idaddress" value="' . $dir["idaddress"] . '" id="" required>
+                    <input type="radio" name="idaddress" value="' . $dir["idaddress"] . '"  required>
                     <h5>' . $dir["street"] . '</h5>
                     <p><span>' . $dir["zipcode"] . '</span>-<span>' . $dir["city"] . '</span></p>
                     <p>' . $dir["country"] . '</p>
