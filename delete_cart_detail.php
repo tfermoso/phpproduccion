@@ -10,7 +10,7 @@ $stm->execute();
 unset($_SESSION["cart"]);
 //Recuperamos el resto del carrito
 $idcart=$_SESSION["idcart"];
-$sql="SELECT * FROM cart_detail as D
+$sql="SELECT D.idcartdetail,D.idcart,D.idproduct,D.price,D.quantity,P.name,P.description,P.image FROM cart_detail as D
 left join product as P on D.idproduct=P.idproduct where idcart=?";
 $stm=$conn->prepare($sql);
 $stm->bindParam(1,$idcart);

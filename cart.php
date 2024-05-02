@@ -105,7 +105,7 @@ var_dump($cart);
     </nav>
     <div class="container contenedor-productos row">
         <div class="shop-cart" id="cart">
-            <a class="nav-link" href="cart"><span><i class="fas fa-shopping-cart"></i><?php echo isset($cart) ? count($cart) : ''; ?> </span></a>
+            <a class="nav-link" href="cart"><span><i class="fas fa-shopping-cart"></i><span id="products_count"><?php echo isset($cart) ? count($cart) : ''; ?></span> </span></a>
         </div>
         <h3>Carrito</h3>
         <div class="table-responsive">
@@ -139,7 +139,7 @@ var_dump($cart);
                             <td><span class="delete" id="idcartdetail'.$product->idcartdetail.'"><i class="fa-solid fa-x"></i></span></td>
                         </tr>';
                     }
-                    echo "<tr><td class='importe_total'  colspan='5'>Total:</td><td class='euros_total' colspan='2'>" . $total . " €</td></tr>"
+                    echo "<tr><td class='importe_total'  colspan='5'>Total:</td><td class='euros_total' id='euros_total' colspan='2'>" . $total . " €</td></tr>"
 
                     ?>
 
