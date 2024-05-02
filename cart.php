@@ -156,14 +156,14 @@ var_dump($cart);
         <button class="btn btn-success" id="btnConfir" type="button">Order Confirm</button>
         <div class="datos_envio">
             <form action="add_order" method="post">
-                <span>Delivery date:</span><input type="date" name="date" id="">
+                <span>Delivery date:</span><input type="date" name="date" id="" required>
                 <hr>
                 <span>Delivery Address:</span>
                 <div class="address row">
                     <?php
                     foreach ($address as $key => $dir) {
                         echo '<div class="col-md-3 col-sm-12">
-                    <input type="radio" name="address" value="' . $dir["idaddress"] . '" id="">
+                    <input type="radio" name="address" value="' . $dir["idaddress"] . '" id="" required>
                     <h5>' . $dir["street"] . '</h5>
                     <p><span>' . $dir["zipcode"] . '</span>-<span>' . $dir["city"] . '</span></p>
                     <p>' . $dir["country"] . '</p>
