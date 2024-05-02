@@ -28,7 +28,16 @@ $(".quantity").change((e) => {
         return acumulador + total;
       }, 0);
       $("#euros_total").html(totalCart+" €");
-      
+      //Actualizamos línea
+      cart.forEach(p => {
+        if(p.idcartdetail==idcartdetail){
+          let total=p.quantity*p.price;
+          let selector="#idcartdetail"+idcartdetail+ " td:eq(4)";
+          $(selector).html(total+" €");
+          
+        }
+      });
+      console.log(cart)
     })
     .catch(error => {
       console.error('Error:', error);
