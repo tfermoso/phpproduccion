@@ -48,3 +48,12 @@
 #products_count{
     border: none;
 }
+.add_address input{
+    margin: 10px;
+}
+.add_address{
+    margin-top: 5px;
+    padding: 10px;
+    border: 1px solid green;
+    border-radius: 10px;
+}

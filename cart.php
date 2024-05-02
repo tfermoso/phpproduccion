@@ -35,8 +35,8 @@ if (isset($_SESSION["username"])) {
             $_SESSION["idcart"] = $idcart;
         }
         //Borramos la tabla cartdetail
-        $sql="delete from cart_detail where idcart=".$idcart;
-        $stm=$conn->prepare($sql);
+        $sql = "delete from cart_detail where idcart=" . $idcart;
+        $stm = $conn->prepare($sql);
         $stm->execute();
         //Insertamos los productos en cart_detail
         foreach ($cart as $key => $product) {
@@ -48,7 +48,7 @@ if (isset($_SESSION["username"])) {
             $stm->bindParam(4, $product->price);
             $stm->execute();
             $idcartdetail = $conn->lastInsertId();
-            $product->idcartdetail=$idcartdetail;
+            $product->idcartdetail = $idcartdetail;
         }
     } else {
         header("Location: ./");
@@ -126,7 +126,7 @@ var_dump($cart);
                     $total = 0;
                     foreach ($cart as $key => $product) {
                         $total += $product->price * $product->quantity;
-                        echo '<tr id="idcartdetail'.$product->idcartdetail.'">
+                        echo '<tr id="idcartdetail' . $product->idcartdetail . '">
                             <th scope="row">' . $key . '</th>
                             <td><img class="img-cart" src="assets/product/' . $product->image . '" alt="" srcset=""></td>
                             <td>
@@ -148,11 +148,13 @@ var_dump($cart);
             </table>
         </div>
         <button class="btn btn-success" id="btnConfir" type="button">Order Confirm</button>
-        <div class="datos_envio" >
+        <div class="datos_envio">
             <span>Delivery date:</span><input type="date" name="" id="">
             <hr>
             <span>Delivery Address:</span>
-
+            <div>
+                <a href="add_address.php"><i class="fa-solid fa-location-dot"></i><i class="fa-solid fa-plus"></i></a>
+            </div>
         </div>
     </div>
 
