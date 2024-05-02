@@ -155,20 +155,28 @@ var_dump($cart);
         </div>
         <button class="btn btn-success" id="btnConfir" type="button">Order Confirm</button>
         <div class="datos_envio">
-            <span>Delivery date:</span><input type="date" name="" id="">
-            <hr>
-            <span>Delivery Address:</span>
-            <div class="address row">
-                <div class="col-md-3 col-sm-12">
-                    <input type="checkbox" name="" id="">
-                    <h5>Calle</h5>
-                    <p><span>ZipCode</span>-<span>City</span></p>
-                    <p>Pais</p>
+            <form action="add_order" method="post">
+                <span>Delivery date:</span><input type="date" name="date" id="">
+                <hr>
+                <span>Delivery Address:</span>
+                <div class="address row">
+                    <?php
+                    foreach ($address as $key => $dir) {
+                        echo '<div class="col-md-3 col-sm-12">
+                    <input type="radio" name="address" value="' . $dir["idaddress"] . '" id="">
+                    <h5>' . $dir["street"] . '</h5>
+                    <p><span>' . $dir["zipcode"] . '</span>-<span>' . $dir["city"] . '</span></p>
+                    <p>' . $dir["country"] . '</p>
+                </div>';
+                    }
+                    ?>
+
                 </div>
-            </div>
-            <div>
-                <a href="add_address.php"><i class="fa-solid fa-location-dot"></i><i class="fa-solid fa-plus"></i></a>
-            </div>
+                <div>
+                    <a href="add_address"><i class="fa-solid fa-location-dot"></i><i class="fa-solid fa-plus"></i></a>
+                </div>
+                <input type="submit" value="Create Order" class="btn btn-success">
+            </form>
         </div>
     </div>
 
