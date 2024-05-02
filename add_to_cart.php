@@ -9,18 +9,23 @@ if (isset($_GET["idproduct"])) {
     if (isset($_SESSION["username"])) {
         //Guardamos en bbdd
         if (isset($_GET["idcart"])) {
-            $idcart=$_GET["idcart"];
-            $price=$_GET["price"];
-            include("conexion.php");
-            $sql="insert into cart_detail (idcart,idproduct,quantity,price)
+            try {
+                $idcart = $_GET["idcart"];
+                $price = $_GET["price"];
+                include("conexion.php");
+                $sql = "insert into cart_detail (idcart,idproduct,quantity,price)
              values (?,?,?,?)";
-            $stm=$conn->prepare($sql);
-            $stm->bindParam(1,$idcart);
-            $stm->bindParam(2,$idproduct);
-            $stm->bindParam(3,$quantity);
-            $stm->bindParam(4,$price);
-            $stm->execute();
-        } 
+                $stm = $conn->prepare($sql);
+                $stm->bindParam(1, $idcart);
+                $stm->bindParam(2, $idproduct);
+                $stm->bindParam(3, $quantity);
+                $stm->bindParam(4, $price);
+                $stm->execute();
+            } catch (Exception $e) {
+                //var_dump($e);
+               
+            }
+        }
     } else {
         //Guardamos el carrito en session
         $product = new Product($idproduct, $quantity);

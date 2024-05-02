@@ -15,12 +15,11 @@ if (isset($_SESSION["cart"])) {
 }
 
 if (isset($_SESSION["username"])) {
-
     //comprobaria si hay carrito en la bbdd
     $user = $_SESSION["username"];
     $iduser = $_SESSION["iduser"];
-    if (!isset($cart) || count($cart) == 0) {
-        try {
+   // if (!isset($cart) || count($cart) == 0) {
+     //   try {
             $sql = "select * from cart_detail where idcart=(select idcart from cart where iduser=? order by date desc limit 1)";
             $stm = $conn->prepare($sql);
             $stm->bindParam(1, $iduser);
@@ -39,11 +38,11 @@ if (isset($_SESSION["username"])) {
             }
 
             //$_SESSION["idcart"]=$result[0]["idcart"];
-        } catch (Exception $e) {
-            var_dump($e->getMessage());
-            exit();
-        }
-    }
+  //      } catch (Exception $e) {
+     //       var_dump($e->getMessage());
+     //       exit();
+   //     }
+   // }
 }
 $idcart=isset($_SESSION["idcart"])?$_SESSION["idcart"]:"";
 
