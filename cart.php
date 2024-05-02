@@ -147,7 +147,13 @@ var_dump($cart);
                 </tbody>
             </table>
         </div>
+        <button class="btn btn-success" id="btnConfir" type="button">Order Confirm</button>
+        <div class="datos_envio" >
+            <span>Delivery date:</span><input type="date" name="" id="">
+            <hr>
+            <span>Delivery Address:</span>
 
+        </div>
     </div>
 
 
