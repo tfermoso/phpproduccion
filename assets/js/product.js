@@ -73,3 +73,7 @@ $(".delete").click((e) => {
     });
 
 })
+
+$("#btnConfir").click(()=>{
+  $(".datos_envio").toggle();
+})

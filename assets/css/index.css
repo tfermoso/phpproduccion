@@ -72,3 +72,9 @@
 .alerta{
     margin-top: 20px;
 }
+.new-address{
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+    border: none;
+}

@@ -1,6 +1,6 @@
 <?php
 session_start();
-var_dump($_SESSION);
+//var_dump($_SESSION);
 
 require_once("conexion.php");
 include_once("./models/product.php");
@@ -23,9 +23,9 @@ if (isset($_SESSION["username"])) {
     $stm->bindParam(1, $iduser);
     $stm->execute();
     $result = $stm->fetchAll(PDO::FETCH_ASSOC);
-    var_dump($result);
+    //var_dump($result);
     if ($stm->rowCount() > 0) {
-        var_dump($result);
+        //var_dump($result);
         $idcart = $result[0]["idcart"];
         //Consulto los articulos del carrito
         $sql = "select * from cart_detail where idcart=?";
@@ -54,7 +54,7 @@ if (isset($_SESSION["username"])) {
     <div class="container contenedor-productos row">
         <div class="shop-cart" id="cart">
             <a class="nav-link" href="cart"><span><i class="fas fa-shopping-cart"></i><?php echo isset($cart) ? count($cart) : ''; ?> </span></a>
-            <?php echo isset($idcart) ? $idcart : "nada" ?>
+            <?php /* echo isset($idcart) ? $idcart : "nada" */?>
         </div>
         <h3>Productos</h3>
 
