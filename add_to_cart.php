@@ -12,7 +12,7 @@ if (isset($_GET["idproduct"])) {
         //Guardamos en bbdd   
         $price = $_GET["price"];
         include("conexion.php");
-        if (isset($_SESSION["idcart"]) & $_SESSION["idcart"]!='') {
+        if (isset($_SESSION["idcart"])) {
             $idcart = $_SESSION["idcart"];
         } else {
             //Guardamos el carrito en bbdd
@@ -25,6 +25,8 @@ if (isset($_GET["idproduct"])) {
         }
         $sql = "insert into cart_detail (idcart,idproduct,quantity,price)
              values (?,?,?,?)";
+             var_dump($_GET);
+             var_dump($idcart);
             $stm = $conn->prepare($sql);
             $stm->bindParam(1, $idcart);
             $stm->bindParam(2, $idproduct);

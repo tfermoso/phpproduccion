@@ -23,7 +23,9 @@ if (isset($_SESSION["username"])) {
     $stm->bindParam(1, $iduser);
     $stm->execute();
     $result = $stm->fetchAll(PDO::FETCH_ASSOC);
+    var_dump($result);
     if ($stm->rowCount() > 0) {
+        var_dump($result);
         $idcart = $result[0]["idcart"];
         //Consulto los articulos del carrito
         $sql = "select * from cart_detail where idcart=?";

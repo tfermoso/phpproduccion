@@ -15,7 +15,8 @@ if(isset($_SESSION["username"]) && isset($_SESSION["idcart"])){
         $stm->execute();
         if($stm->rowCount()>0){
             //Pendiente borrar datos de session
-
+            unset($_SESSION["cart"]);
+            unset($_SESSION["idcart"]);
             header("Location: ./");
             exit();
         }
