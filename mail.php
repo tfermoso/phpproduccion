@@ -14,14 +14,14 @@ try {
     $mail->isSMTP();
     $mail->Host       = 'smtp.gmail.com';
     $mail->SMTPAuth   = true;
-    $mail->Username   = 'tucorreo@gmail.com'; // Tu dirección de correo de Gmail
-    $mail->Password   = 'tucontraseña';       // Tu contraseña de Gmail
+    $mail->Username   = 'cursoceica2024@gmail.com'; // Tu dirección de correo de Gmail
+    $mail->Password   = 'Ceica23$';       // Tu contraseña de Gmail
     $mail->SMTPSecure = 'tls';
     $mail->Port       = 587;
 
     // Configurar remitente y destinatario
-    $mail->setFrom('tucorreo@gmail.com', 'Tu Nombre');
-    $mail->addAddress('destinatario@example.com', 'Destinatario');
+    $mail->setFrom('cursoceica@gmail.com', 'Tomas');
+    $mail->addAddress('tomas.fermoso@gmail.com', 'Tomas Fermoso');
 
     // Contenido del correo
     $mail->isHTML(true);
