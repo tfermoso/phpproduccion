@@ -75,10 +75,10 @@ if (isset($_SESSION["username"])) {
                     <span class="navbar-toggler-icon"></span>
                 </button>
             </div>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Inicio</a>
+                        <a class="nav-link" href="./">Inicio</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Productos</a>
@@ -88,7 +88,16 @@ if (isset($_SESSION["username"])) {
                     </li>
 
                 </ul>
-                <span id="user"><?php if (isset($user)) echo $user; ?></span>
+                <li class="nav-item dropdown navbar-nav ms-auto" <?php if (!isset($user)) echo 'hidden'; ?>>
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span id="user"><?php if (isset($user)) echo $user; ?></span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="close">Close</a></li>
+                        
+                    </ul>
+                </li>
+                
             </div>
         </div>
     </nav>

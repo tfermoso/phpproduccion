@@ -95,7 +95,7 @@ var_dump($cart);
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Inicio</a>
+                        <a class="nav-link" href="./">Inicio</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Productos</a>
@@ -105,7 +105,15 @@ var_dump($cart);
                     </li>
 
                 </ul>
-                <span id="user"><?php if (isset($user)) echo $user; ?></span>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span id="user"><?php if (isset($user)) echo $user; ?></span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="close">Close</a>
+
+                    </div>
+                </li>
             </div>
         </div>
     </nav>
@@ -156,7 +164,7 @@ var_dump($cart);
         <button class="btn btn-success" id="btnConfir" type="button">Order Confirm</button>
         <div class="datos_envio">
             <form action="add_order" method="post">
-                <span>Delivery date:</span><input type="date" name="date"  required>
+                <span>Delivery date:</span><input type="date" name="date" required>
                 <hr>
                 <span>Delivery Address:</span>
                 <div class="address row">
