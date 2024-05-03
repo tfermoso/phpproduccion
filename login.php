@@ -46,6 +46,7 @@ if (isset($error)) {
             <button type="submit" class="btn btn-primary">Login</button>
         </div>
     </form>
+    <a href="register">*Create new account</a>
 </div>
 
 <?php include("footer.php"); ?>
