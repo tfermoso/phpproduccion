@@ -156,7 +156,7 @@ var_dump($cart);
         <button class="btn btn-success" id="btnConfir" type="button">Order Confirm</button>
         <div class="datos_envio">
             <form action="add_order" method="post">
-                <span>Delivery date:</span><input type="date" name="date" id="" required>
+                <span>Delivery date:</span><input type="date" name="date"  required>
                 <hr>
                 <span>Delivery Address:</span>
                 <div class="address row">

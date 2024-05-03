@@ -1,5 +1,7 @@
 <?php
 session_start();
+var_dump($_SESSION);
+
 require_once("conexion.php");
 include_once("./models/product.php");
 
@@ -9,42 +11,41 @@ $consulta = $conn->prepare($sql);
 $consulta->execute();
 // Obtener los resultados
 $resultados = $consulta->fetchAll(PDO::FETCH_ASSOC);
-//Compruebo si hay carrito
-if (isset($_SESSION["cart"])) {
-    $cart = $_SESSION["cart"];
-}
 
 if (isset($_SESSION["username"])) {
     //comprobaria si hay carrito en la bbdd
     $user = $_SESSION["username"];
     $iduser = $_SESSION["iduser"];
-   // if (!isset($cart) || count($cart) == 0) {
-     //   try {
-            $sql = "select * from cart_detail where idcart=(select idcart from cart where iduser=? order by date desc limit 1)";
-            $stm = $conn->prepare($sql);
-            $stm->bindParam(1, $iduser);
-            $stm->execute();
-            $result = $stm->fetchAll(PDO::FETCH_ASSOC);
-            $cart = array();
-            foreach ($result as $key => $p) {
-                $_SESSION["idcart"] = $p["idcart"];
-                $product = new Product($p["idproduct"], $p["quantity"]);
-                array_push($cart, $product); 
-            }
+    $sql = "select C.idcart from cart C 
+    left join `order` O on C.idcart=O.idcart 
+    where iduser=? and O.idcart is null order by C.date desc limit 1";
+    $stm = $conn->prepare($sql);
+    $stm->bindParam(1, $iduser);
+    $stm->execute();
+    $result = $stm->fetchAll(PDO::FETCH_ASSOC);
+    if ($stm->rowCount() > 0) {
+        $idcart = $result[0]["idcart"];
+        //Consulto los articulos del carrito
+        $sql = "select * from cart_detail where idcart=?";
+        $stm = $conn->prepare($sql);
+        $stm->bindParam(1, $idcart);
+        $stm->execute();
+        $result = $stm->fetchAll(PDO::FETCH_ASSOC);
+        $cart = array();
+        foreach ($result as $key => $p) {
+            $product = new Product($p["idproduct"], $p["quantity"]);
+            array_push($cart, $product);
+        }
 
-            $_SESSION["cart"] = $cart;
-            if(isset($_SESSION["idcart"])){
-                $idcart=$_SESSION["idcart"];
-            }
-
-            //$_SESSION["idcart"]=$result[0]["idcart"];
-  //      } catch (Exception $e) {
-     //       var_dump($e->getMessage());
-     //       exit();
-   //     }
-   // }
+        $_SESSION["idcart"] = $idcart;
+        $_SESSION["cart"] = $cart;
+    }
+} else {
+    if (isset($_SESSION["cart"])) {
+        $cart = $_SESSION["cart"];
+    }
 }
-$idcart=isset($_SESSION["idcart"])?$_SESSION["idcart"]:"";
+
 
 ?>
 <!doctype html>
@@ -92,7 +93,7 @@ $idcart=isset($_SESSION["idcart"])?$_SESSION["idcart"]:"";
     <div class="container contenedor-productos row">
         <div class="shop-cart" id="cart">
             <a class="nav-link" href="cart"><span><i class="fas fa-shopping-cart"></i><?php echo isset($cart) ? count($cart) : ''; ?> </span></a>
-            <?php echo isset($_SESSION["idcart"]) ? $_SESSION["idcart"] : "nada" ?>
+            <?php echo isset($idcart) ? $idcart : "nada" ?>
         </div>
         <h3>Productos</h3>
 
@@ -112,8 +113,8 @@ $idcart=isset($_SESSION["idcart"])?$_SESSION["idcart"]:"";
             </div>
           </div>
           <form action="add_to_cart.php" method="get">
-          <div class="add-to-cart">
-            <input type="hidden" name="idcart" value="' . $idcart . '">
+          <div class="add-to-cart">       
+         
             <input type="hidden" name="price" value="' . $product["price"] . '">
             <input type="hidden" name="idproduct" value="' . $product["idproduct"] . '">
             <input min=1 step=1 class="form-control" type="number" name="quantity" id="" required >
