@@ -70,13 +70,13 @@ if (isset($_POST["username"])) {
 }
 ?>
 <?php include("header.php"); ?>
-<div class="container">
-    <form class="form" action="" method="post" enctype="multipart/form-data">
+<div class="container row container-register">
+    <form class="form register col-md-8 col-sm-12" action="" method="post" enctype="multipart/form-data">
         <input class="form-control" type="text" name="username" id="" placeholder="username">
         <input class="form-control" type="email" name="email" placeholder="email">
         <input class="form-control" type="password" name="password" placeholder="password">
         <input class="form-control" type="file" name="file" id="">
-        <button class="btn btn-success" type="submit">New</button>
+        <button class="btn btn-success btn-large" type="submit">New user</button>
     </form>
     <?php
     if (isset($msg)) {
