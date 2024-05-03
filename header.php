@@ -46,7 +46,7 @@
                         
                     </ul>
                 </li>
-                
+                <li class="nav-item dropdown navbar-nav ms-auto" <?php if (isset($user)) echo 'hidden'; ?>><a href="login">Login</a></li>
             </div>
         </div>
     </nav>
